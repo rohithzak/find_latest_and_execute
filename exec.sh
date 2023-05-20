@@ -1,10 +1,10 @@
 #!/bin/bash
 
-sourcedir=$(ls -td /home/rohith/Downloads/EMR/scripts/* | head -1)
-state=/home/rohith/Downloads/EMR/scripts/.executed
+sourcedir=$(ls -td /path/to/directory/ | head -1)
+state=/file/to/store/executed/files/
 
 if [ -f "$state" ]; then
-	for script in $sourcedir/*/*; do
+	for script in $sourcedir/*; do
     if grep -q $script $state; then
       echo "skipping $script"
     else
@@ -20,9 +20,9 @@ if [ -f "$state" ]; then
   done
 fi
 
-success=$(wc -l < /home/rohith/Downloads/EMR/scripts/.executed)
+success=$(wc -l < $state)
 
 if [ $success -eq 4 ]; then
-	> /home/rohith/Downloads/EMR/scripts/.executed
+	> $state
 fi
 
